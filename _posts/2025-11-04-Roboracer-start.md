@@ -6,6 +6,5 @@ layout: default
 Since installing Ubuntu is complicated, takes lot of resource, and not compatible with others,
 I chose to use Docker as it is recommended in Roboracer Learn Lab1.
 
-<img width="837" height="253" alt="image" src="https://github.com/user-attachments/assets/c418d323-1488-4b8f-aa26-3025c04a111b" />
-The original Docker cannot be installed in my Mac because of version issue, I am trying Colima + Docker CLI, which is popular for Mac OS 12.
+The original Docker cannot be installed in my Mac because of version issue (requires Mac OS 14 but my 2016 Mac does not support it), so I am trying Colima + Docker CLI, which is popular for Mac OS 12.
 
