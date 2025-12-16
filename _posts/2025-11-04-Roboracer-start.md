@@ -41,3 +41,13 @@ find the correct lima version
 
 We are going to use Virtual Box instead. Popular in Roboracer community, and much more compatible.
 [Virtual Box]
+------------------------------------------------------------
+
+1. Install VirtualBox(0.5GB) https://www.virtualbox.org/wiki/Downloads   : macOS / Intel hosts
+2. Download Ubuntu ISO (5GB), install version 22.04 (old version) which is more compatible with F1Tenth Roboracer: https://releases.ubuntu.com/22.04/
+3. Open VirtuaBox and create new, select Ubuntu ISO,
+4. Do not check proceed with Unattended Installation, and choose OS: Linux, OS Distribution: Ubuntu, OS Version: Ubuntu(64-bit)
+5. Allocation (Do not check Use EFI, we are going to use normal BIOS which is more stable)
+- memory 8192MB: Ubuntu Desktop, Docker Container, and ROS2+ simulators
+- Disk 40GB: Ubuntu installation, Docker images, ROS2 packages, and working files
+- CPU 2: dual core Macbook, to run Docker and ROS2 simultaneously
