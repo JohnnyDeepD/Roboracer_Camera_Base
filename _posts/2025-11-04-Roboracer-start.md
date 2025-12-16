@@ -57,4 +57,13 @@ We are going to use Virtual Box instead. Popular in Roboracer community, and muc
 1. Selected Roboracer Virtual Machine and Start (Double Click)
 2. Ubuntu Installation window will appear
 3. Install Ubuntu, English, Normal Installation, Download updates check, Erase disk and install (safe with VM), time zone, name and password, restart after installation. Anything that requires access to keyboard shall be accepted such as input monitoring(keystroke) and easy to use (event), microphone access is not necessary.
-4. 
+
+Restart VM, and it will say please remove the installation medium and press ENTER, just press ENTER, it will remove ISO automatically and boot Ubuntu.
+When host key combo pops up, select capture to work inside VM, to get out, press left key then command key.
+
+Delete Ubuntu ISO because installation is over, and it is 5 GB.
+Updated software popup: for Ubuntu is for security patch and bug fix within 22.04 version, so press install now.
+Ubuntu 24.04 Upgrade popup: Do not upgrade Ubuntu version.
+
+
+
