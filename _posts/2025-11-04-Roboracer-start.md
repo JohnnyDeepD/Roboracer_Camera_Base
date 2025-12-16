@@ -51,3 +51,10 @@ We are going to use Virtual Box instead. Popular in Roboracer community, and muc
 - memory 8192MB: Ubuntu Desktop, Docker Container, and ROS2+ simulators
 - Disk 40GB: Ubuntu installation, Docker images, ROS2 packages, and working files
 - CPU 2: dual core Macbook, to run Docker and ROS2 simultaneously
+6. Finish creating Virtual Machine
+
+[Install Ubuntu]
+1. Selected Roboracer Virtual Machine and Start (Double Click)
+2. Ubuntu Installation window will appear
+3. Install Ubuntu, English, Normal Installation, Download updates check, Erase disk and install (safe with VM), time zone, name and password, restart after installation. Anything that requires access to keyboard shall be accepted such as input monitoring(keystroke) and easy to use (event), microphone access is not necessary.
+4. 
