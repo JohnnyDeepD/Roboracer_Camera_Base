@@ -110,6 +110,23 @@ create_publisher - publisher creation in drive topic
 timer_callback - message per 0.1 second
 
 
+for clipboard sharing with virtual machine, we are going to install guest additions
+first get out of Docker with exit command
+
+then
+sudo apt update
+sudo apt install virtualbox-guest-utils virtualbox-guest-x11 -y
+sudo reboot
+
+then we will set Devices → Shared Clipboard → Bidirectional 
+
+This didn't work because the screen of Ubuntu was cracking
+we had to deleted all guestAddition 
+sudo /opt/VBoxGuestAdditions-*/uninstall.sh
+sudo reboot
+
+and eject the guest additions cd image
+
 
 
 
