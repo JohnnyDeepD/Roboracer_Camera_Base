@@ -207,6 +207,9 @@ class Relay(Node):
         self.publisher = self.create_publisher(AckermannDriveStamped, 'drive_relay', 10)
     
     def listener_callback(self, msg):
+        new_msg = AckermannDriveStamped()
+        new_msg.drive.speed = msg.drive.speed * 3.0
+        new_msg.drive.steering_angle = msg.drive.steering_angle * 3.0
         self.publisher.publish(msg)
 
 def main(args=None):
@@ -223,4 +226,25 @@ if __name__ == '__main__':
 ctrl+x, y, then enter for save
 rights:
 chmod +x scripts/relay.py
+
+[update before build]
+(make sure working in lab1_pkg directory with cd command)
+nano cMakeLists.txt
+
+
+add this right above ament_package()
+
+install(PROGRAMS
+  scripts/talker.py
+  scripts/relay.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+ament_package()
+
+
+[build]
+cd /lab1_ws
+colcon build
+source install/setup.bash
 
