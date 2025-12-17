@@ -96,7 +96,18 @@ enter for save
 for rights:
 chmod +x scripts/talker.py
 
+explanation:
+required Deliverable 2:
+talker node creation
+AckermannDriveStamped message publishing in drive topic
+v parameter → speed field
+d parameter → steering_angle field
 
+code:
+Node class inheritence - ROS2 node creation
+declare_parameter - v, d parameter declaration
+create_publisher - publisher creation in drive topic
+timer_callback - message per 0.1 second
 
 
 
