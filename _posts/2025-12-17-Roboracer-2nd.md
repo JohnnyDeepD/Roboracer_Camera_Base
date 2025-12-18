@@ -1,4 +1,4 @@
----
+<img width="974" height="646" alt="image" src="https://github.com/user-attachments/assets/f35b7b1a-93d5-45d9-b1bb-09050b9d999a" />---
 layout: default
 ---
 
@@ -305,5 +305,31 @@ seems to be working, ran it in tmux for multiple terminals
 [ROS2 commands]
 commands need /, when it cannot find something but it is in there
 <img width="974" height="365" alt="image" src="https://github.com/user-attachments/assets/3d21e5d3-8b59-4d55-ad80-f7ad5f892be9" />
+
+
+<img width="974" height="623" alt="image" src="https://github.com/user-attachments/assets/f88cd599-9236-4a8e-8f24-bb7ad79fe0c6" />
+
+<img width="974" height="646" alt="image" src="https://github.com/user-attachments/assets/17eb8b56-1322-447c-9df9-511fd130499c" />
+
+seems to be working with subscription and publishing, so I would like to move on to SUBMISSION.md
+
+Lab 1: Intro to ROS 2
+Written Questions
+Q1: During this assignment, you've probably ran these two following commands at some point: source /opt/ros/foxy/setup.bash and source install/local_setup.bash. Functionally what is the difference between the two?
+Answer: 
+- source /opt/ros/foxy/setup.bash is for setting up ROS2 FOXY system overall such as rclpy, ackermann_msgs, and ros2 commands such as ros2 launch
+- source install/local_setup.bash is for setting up my workspace such as lab1_pkg, adding talker.py and relay.py also. this includes the first ROS2 foxy source because it is built upon that.
+
+Q2: What does the queue_size argument control when creating a subscriber or a publisher? How does different queue_size affect how messages are handled?
+Answer: 
+  The messages would be saved in the buffer for the maximum size of queue_size when the messages are not processed yet, and delete old ones when the queue_size is full. We could make it store more messages but it will require more memory space.
+
+create_publisher(message type, topic, queue_size)
+
+Q3: Do you have to call colcon build again after you've changed a launch file in your package? (Hint: consider two cases: calling ros2 launch in the directory where the launch file is, and calling it when the launch file is installed with the package.)
+Answer: 
+  We have to call colcon build when the launch file has to be copied from /src to /install
+So when we are launching in directory(/src) where the launch file is, colcon build is not needed,
+but when we are launching file in installed package, colcon build is necessary.
 
 
