@@ -298,3 +298,12 @@ after few error messages I found a typo, 'parameter' should be 'parameters' in t
 also 'pythond' in talker.py should be 'python'
 and the indentations within python scripts should be made with 'spaces' not 'tabs' in ubuntu terminal 
 
+seems to be working, ran it in tmux for multiple terminals
+<img width="974" height="261" alt="image" src="https://github.com/user-attachments/assets/bd06bfdc-80c4-460c-b710-dd868505da18" />
+
+
+[ROS2 commands]
+commands need /, when it cannot find something but it is in there
+<img width="974" height="365" alt="image" src="https://github.com/user-attachments/assets/3d21e5d3-8b59-4d55-ad80-f7ad5f892be9" />
+
+
