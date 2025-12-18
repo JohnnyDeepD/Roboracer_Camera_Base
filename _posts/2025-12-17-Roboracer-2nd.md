@@ -208,8 +208,8 @@ class Relay(Node):
     
     def listener_callback(self, msg):
         new_msg = AckermannDriveStamped()
-        new_msg.drive.speed = msg.drive.speed * 3.0
-        new_msg.drive.steering_angle = msg.drive.steering_angle * 3.0
+        new_msg.drive.speed = msg.drive.speed * 3.0                       #as lab1 guideline
+        new_msg.drive.steering_angle = msg.drive.steering_angle * 3.0     #as lab1 guideline
         self.publisher.publish(msg)
 
 def main(args=None):
@@ -247,4 +247,54 @@ ament_package()
 cd /lab1_ws
 colcon build
 source install/setup.bash
+
+(opening Docker Again after VM reboot)
+docker start -i f1tenth_lab1
+
+[Deliverable 3 making launch file]
+cd /lab1_ws/src/lab1_pkg
+mkdir -p launch
+nano launch/lab1_launch.py
+
+from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    return LaunchDescription([
+        Node(
+            package='lab1_pkg',
+            executable='talker.py',
+            name='talker',
+            parameters=[{'v': 1.0, 'd': 0.5}]
+        ),
+        Node(
+            package='lab1_pkg',
+            executable='relay.py',
+            name='relay'
+        )
+    ])
+
+As lab1 guideline: Launching both nodes and setting talker node parameters
+
+[update CMakeLists.txt: used for ROS2 build with code colcon build, define file's install location and make Python script executable, without install() section the scripts will not be installed thus will not become executable]
+nano CMakeLists.txt
+
+add codes below install(PROGRAMS
+
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}
+)
+
+[build]
+cd /lab1_ws
+colcon build
+source install/setup.bash
+
+[test launch file]
+ros2 launch lab1_pkg lab1_launch.py
+
+after few error messages I found a typo, 'parameter' should be 'parameters' in the launch file
+also 'pythond' in talker.py should be 'python'
+and the indentations within python scripts should be made with 'spaces' not 'tabs' in ubuntu terminal 
 
