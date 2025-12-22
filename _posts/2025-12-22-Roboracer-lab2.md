@@ -157,3 +157,17 @@ ros2 launch f1tenth_gym_ros gym_bridge_launch.py
 
 <img width="1214" height="750" alt="image" src="https://github.com/user-attachments/assets/d5b73c3d-ed1c-45c1-a483-89702da48ad6" />
 There we go!
+
+crtl+c for closing RViz2
+exit for container exit
+
+[ start docker again ] 
+xhost +local:root
+docker start -i f1tenth_lab2
+
+go to workspace
+cd /lab1_ws
+
+open RViz again
+source install/setup.bash
+ros2 launch f1tenth_gym_ros gym_bridge_launch.py
