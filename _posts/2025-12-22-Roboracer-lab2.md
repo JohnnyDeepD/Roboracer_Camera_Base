@@ -171,3 +171,38 @@ cd /lab1_ws
 open RViz again
 source install/setup.bash
 ros2 launch f1tenth_gym_ros gym_bridge_launch.py
+
+[making safety_node.py]
+go to directory: cd /lab1_ws/src/lab2_pkg
+make scripts folder like lab1 (general ROS2 way of making python files): mkdir -p scripts
+make file: touch scripts/safety_node.py
+
+to edit python files, install nano again to this new Docker
+apt-get update
+apt-get install -y nano
+
+open setup.py and edit
+nano /lab1_ws/src/lab2_pkg/setup.py
+
+entry_points={
+        'console_scripts': [
+            'safety_node = lab2_pkg.scripts.safety_node:main',
+        ],
+    },
+
+ctrl+o and enter for save, then ctrl+X to exit
+
+go to scripts folder and edit safety_node.py with nano
+
+#import libraries
+import rclpy                              # for ROS2
+from rclpy.node import Node
+
+from sensor_msgs.msg import LaserScan     # for lidar sensor data
+from nav_msgs.msg import Odometry         # for vehicle velocity
+
+#constructor with node class inheretance
+class SafetyNode(Node):
+    def __init__(self):
+        super().__init__('___________')
+        
