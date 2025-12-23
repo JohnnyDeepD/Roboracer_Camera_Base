@@ -196,13 +196,55 @@ go to scripts folder and edit safety_node.py with nano
 
 #import libraries
 import rclpy                              # for ROS2
+import math                        # for math.cos() calculation at Time to Collision
 from rclpy.node import Node
 
 from sensor_msgs.msg import LaserScan     # for lidar sensor data
 from nav_msgs.msg import Odometry         # for vehicle velocity
+from ackermann_msgs.msg import AckermannDriveStamped   # for vehicle control
 
-#constructor with node class inheretance
-class SafetyNode(Node):
-    def __init__(self):
-        super().__init__('___________')
-        
+class SafetyNode(Node):                    # node class inheritance
+
+    # constructor
+    def __init__(self):                    
+        super().__init__('safety_node')    # give a name
+
+        # initialize
+        self.speed = 0.0
+
+        #subscriber (lidar)
+        self.scan_subscription = self.create_subscription(  # subscribe data
+            LaserScan,                                 # receive lidar data
+            'scan',                                    # topic name in ROS2
+            self.scan_callback,            # a function that runs for every new data
+            10)                 # queue size to keep in the buffer before processing
+                
+        #publisher (vehicle control)
+        self.publisher = self.create_publisher(
+            AckermannDriveStamped,                    # transmit drive command
+            'drive',                                  # topic name in ROS2
+            10)                 # queue size to keep in the buffer before processing          
+        #subscriber (velocity)
+        self.odom_subscription = self.create_subscription(  # subscribe data
+            Odometry,                                  # receive velocity
+            'odom',                                    # topic name in ROS2
+            self.odom_callback,            # a function that runs for every new data
+            10)                 # queue size to keep in the buffer before processing
+                
+        def odom_callback(self, msg):                # msg object as an argument
+            self.speed = msg.twist.twist.linear.x    # velocity is in this path of msg
+            
+        def scan_callback (self, msg):               # msg object as an argument
+            for i,r in enumerate(msg.ranges):        # get both index and range
+                theta = msg.angle_min + msg.angle_increment * i    # theta calc
+                v_rel = self.speed * math.cos(theta) #relative velocity calc
+
+                if v_rel > 0:         # if v_rel is valid
+                    ttc = r/v_rel     # calculate time to collision
+
+                    if ttc<0.5:       # if there is collision within 0.5 sec
+                        drive_msg = AckermannDriveStamped() # create message object
+                        drive_msg.drive.speed = 0.0         # initialize speed to 0
+                        self.publisher.publish(drive_msg)   # publish message
+                        self.get_logger().warn("AEB Active! Braking...") # leave log
+                        
