@@ -230,21 +230,38 @@ class SafetyNode(Node):                    # node class inheritance
             'odom',                                    # topic name in ROS2
             self.odom_callback,            # a function that runs for every new data
             10)                 # queue size to keep in the buffer before processing
-                
-        def odom_callback(self, msg):                # msg object as an argument
-            self.speed = msg.twist.twist.linear.x    # velocity is in this path of msg
-            
-        def scan_callback (self, msg):               # msg object as an argument
-            for i,r in enumerate(msg.ranges):        # get both index and range
-                theta = msg.angle_min + msg.angle_increment * i    # theta calc
-                v_rel = self.speed * math.cos(theta) #relative velocity calc
 
-                if v_rel > 0:         # if v_rel is valid
-                    ttc = r/v_rel     # calculate time to collision
+    #methods
+    def odom_callback(self, msg):                # msg object as an argument
+        self.speed = msg.twist.twist.linear.x    # velocity is in this path of msg
+        
+    def scan_callback (self, msg):               # msg object as an argument
+        for i,r in enumerate(msg.ranges):        # get both index and range
+            theta = msg.angle_min + msg.angle_increment * i    # theta calc
+            v_rel = self.speed * math.cos(theta) #relative velocity calc
 
-                    if ttc<0.5:       # if there is collision within 0.5 sec
-                        drive_msg = AckermannDriveStamped() # create message object
-                        drive_msg.drive.speed = 0.0         # initialize speed to 0
-                        self.publisher.publish(drive_msg)   # publish message
-                        self.get_logger().warn("AEB Active! Braking...") # leave log
-                        
+            if v_rel > 0:         # if v_rel is valid
+                ttc = r/v_rel     # calculate time to collision
+
+                if ttc<0.5:       # if there is collision within 0.5 sec
+                    drive_msg = AckermannDriveStamped() # create message object
+                    drive_msg.drive.speed = 0.0         # initialize speed to 0
+                    self.publisher.publish(drive_msg)   # publish message
+                    self.get_logger().warn("AEB Active! Braking...") # leave log
+                    break          # no more loop after the danger
+
+def main(args=None):
+    rclpy.init(args=args)       # start the communication
+    node = SafetyNode()    # create object with SafetyNode class
+    
+    try:
+        rclpy.spin(node)        # run node for callback functions
+    except KeyboardInterrupt:   # Ctrl+C for quit
+        pass
+    
+    # exit
+    node.destroy_node()      
+    rclpy.shutdown()        
+
+if __name__ == "__main__":
+  main()
