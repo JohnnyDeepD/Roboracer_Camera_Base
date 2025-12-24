@@ -268,3 +268,78 @@ if __name__ == "__main__":
 
 <img width="815" height="578" alt="image" src="https://github.com/user-attachments/assets/5c3d3fed-8246-4f69-8508-014a681ce865" />
 This is where we saved the python file
+
+need tmux for this docker again, one terminal for rviz and another for running the node we made
+
+[install tmux]
+apt-get update
+apt-get install -y tmux
+
+start tmux with tmux command and make terminals with ctr+b,c and move with crt+b, n
+exit with exit
+
+[open rviz in 1 terminal]
+source install/setup.bash
+ros2 launch f1tenth_gym_ros gym_bridge_launch.py
+
+[runs node in another terminal]
+cd /lab1_ws
+source install/setup.bash
+ros2 run lab2_pkg safety_node
+
+no executable found, got to update settings
+<img width="918" height="641" alt="image" src="https://github.com/user-attachments/assets/0ebe92bb-9701-4f38-beb9-3e673499ee52" />
+
+colcon build --packages-select lab2_pkg
+<img width="918" height="641" alt="image" src="https://github.com/user-attachments/assets/b68b103f-12d0-4cc2-bca2-70eac3c13bf4" />
+did it in wrong folder, remove build, install, log folder for clearance with
+rm -rf build install log
+(we have to do this in the right folder because the path might get confused when packaging)
+
+#go back to workspace
+cd /lab1_ws
+colcon build --packages-select lab2_pkg
+
+#run again
+ros2 run lab2_pkg safety_node
+<img width="918" height="641" alt="image" src="https://github.com/user-attachments/assets/3bc875e8-305e-44d3-9688-c79b4709e797" />
+It cannot find safety_node.py in scripts folder, so let's move it to main package folder for simplicity.
+
+#move file to python pkg folder
+mv src/lab2_pkg/scripts/safety_node.py src/lab2_pkg/lab2_pkg/
+
+#delete scripts folder
+rm -rf src/lab2_pkg/scripts
+
+#fix the entry_points in setup.py
+nano src/lab2_pkg/setup.py
+
+#delete .scripts
+'safety_node = lab2_pkg.safety_node:main',
+(crt+o, enter, ctr+x)
+
+#build again and run
+cd /lab1_ws
+colcon build --packages-select lab2_pkg
+source install/setup.bash
+ros2 run lab2_pkg safety_node
+
+now it looks like it is waiting for the car to collide
+<img width="918" height="641" alt="image" src="https://github.com/user-attachments/assets/78460f0a-3cc4-4286-9b8f-180717d95bf7" />
+
+#try to move the car at another tmux terminal
+source install/setup.bash
+ros2 topic pub /drive ackermann_msgs/msg/AckermannDriveStamped "{drive: {speed: 2.0}}"
+
+car not moving
+<img width="1036" height="489" alt="image" src="https://github.com/user-attachments/assets/22e8d703-e286-4f18-bf3c-7ec1bfdd0e47" />
+
+found that the map and car is not found in the simulator
+<img width="796" height="561" alt="image" src="https://github.com/user-attachments/assets/855e0614-7fee-4627-8c8c-a73eec19fd00" />
+
+[scroll tmux]
+crt+b, [, arrows, 
+q for quit
+
+
+
