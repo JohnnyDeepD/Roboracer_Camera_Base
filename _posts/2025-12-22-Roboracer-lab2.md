@@ -341,5 +341,38 @@ found that the map and car is not found in the simulator
 crt+b, [, arrows, 
 q for quit
 
+levine.yaml map error with rviz
+<img width="813" height="561" alt="image" src="https://github.com/user-attachments/assets/4e748bc3-bc5a-4635-92c3-5ad5bf5b573b" />
 
+let's debug
+#find levine.yaml
+find / -name "levine.yaml"
 
+the file is in /lab1_ws
+/lab1_ws/src/f1tenth_gym/gym/f110_gym/envs/maps/levine.yaml
+/lab1_ws/src/f1tenth_gym_ros/maps/levine.yaml
+
+But the system is looking for it in /sim_ws
+
+#fine anything with sim_ws
+grep -r "sim_ws" /lab1_ws/src
+
+got to change this part:
+/lab1_ws/src/f1tenth_gym_ros/config/sim.yaml: map_path: '/sim_ws/src/f1tenth_gym_ros/maps/levine'
+
+#open the file and change
+nano /lab1_ws/src/f1tenth_gym_ros/config/sim.yaml
+
+before: map_path: '/sim_ws/src/f1tenth_gym_ros/maps/levine'
+after: map_path: '/lab1_ws/src/f1tenth_gym_ros/maps/levine'
+
+lets, build and source and launch again
+cd /lab1_ws
+colcon build --packages-select f1tenth_gym_ros
+source install/setup.bash
+ros2 launch f1tenth_gym_ros gym_bridge_launch.py
+<img width="944" height="599" alt="image" src="https://github.com/user-attachments/assets/8a3b6c1d-952f-440b-a965-2574d14af597" />
+now there is the levine hall!
+
+but some errors are there, let's debug 
+<img width="944" height="599" alt="image" src="https://github.com/user-attachments/assets/26959786-4119-4537-951d-8554554f9f64" />
