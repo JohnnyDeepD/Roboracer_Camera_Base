@@ -388,3 +388,44 @@ rviz shows this error,
 
 [gym_bridge-2] Traceback ... pkg_resources ...
 this error indicates that gym_bridge dies, so let's check if python library version synch can fix this problem.
+
+pip3 install setuptools==58.2.0
+
+after updating python version there is still the same error, so I scrolled up to find the exact error message
+<img width="1215" height="752" alt="image" src="https://github.com/user-attachments/assets/b26be47a-e5e6-40e2-b267-339bdaa634f9" />
+
+we are missing a library!
+pip3 install transforms3d
+
+launch again
+still error, 
+hard to find in terminal so I tried using log file
+
+ros2 launch f1tenth_gym_ros gym_bridge_launch.py > debug.txt 2>&1
+nano debug.txt
+
+with ctrl w (where is) I can find the text I want, and alt+w for next
+<img width="1215" height="752" alt="image" src="https://github.com/user-attachments/assets/eb43da67-b424-4355-97ba-9e8d49d36152" />
+
+The error shows compatibility error of llvmlite and AttributeError: 'GEPInstr'...
+so compatible versions shall be installed
+pip3 install numba==0.53.1 llvmlite==0.36.0
+
+#numpy old version for numba old version 
+pip3 install "numpy<1.20"    
+
+lauch still error
+<img width="1215" height="752" alt="image" src="https://github.com/user-attachments/assets/51ebc072-ca81-43ec-874d-fc8aa2bc9808" />
+we are in dependency hell now.
+
+[I thought of moving on with C++, but the whole gym is made of python for ai system algorithm practice, so I will continue with python, and make it C++ later for real world implementation, the time and memory efficiency in real driving environment.]
+
+#try with medium version
+pip3 install numba==0.56.4 llvmlite==0.39.1
+pip3 install numpy==1.21.6
+
+<img width="1215" height="752" alt="image" src="https://github.com/user-attachments/assets/b04c8652-165e-461b-b2f0-ddf577535c58" />
+It is working! No error!
+
+
+
