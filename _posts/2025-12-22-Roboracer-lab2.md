@@ -382,3 +382,9 @@ Map coordinates seems to be out of connection
 
 There is no map frame, 
 <img width="1215" height="752" alt="image" src="https://github.com/user-attachments/assets/a980dc29-0293-458c-ad38-9881761a7911" />
+
+rviz shows this error, 
+<img width="1215" height="752" alt="image" src="https://github.com/user-attachments/assets/6ad0da6d-efea-44cd-b9d7-fa1aa86eed0e" />
+
+[gym_bridge-2] Traceback ... pkg_resources ...
+this error indicates that gym_bridge dies, so let's check if python library version synch can fix this problem.
