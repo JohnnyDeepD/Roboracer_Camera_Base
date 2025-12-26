@@ -427,5 +427,9 @@ pip3 install numpy==1.21.6
 <img width="1215" height="752" alt="image" src="https://github.com/user-attachments/assets/b04c8652-165e-461b-b2f0-ddf577535c58" />
 It is working! No error!
 
+alright now let's check the movement of the car with Ackermann drive command
+ros2 topic pub /drive ackermann_msgs/msg/AckermannDriveStamped "{drive: {speed: 2.0, steering_angle: 0.5}}"
 
+https://github.com/user-attachments/assets/2c1e5356-0334-4ebc-9388-ebaa03224937
+It is working!
 
