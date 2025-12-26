@@ -430,6 +430,16 @@ It is working! No error!
 alright now let's check the movement of the car with Ackermann drive command
 ros2 topic pub /drive ackermann_msgs/msg/AckermannDriveStamped "{drive: {speed: 2.0, steering_angle: 0.5}}"
 
-https://github.com/user-attachments/assets/2c1e5356-0334-4ebc-9388-ebaa03224937
-It is working!
+
+
+
+
+https://github.com/user-attachments/assets/34a3a63c-c31e-4531-a577-43ba06ac3a0f
+
+<video width="100%" controls>
+  <source src="https://github.com/user-attachments/assets/34a3a63c-c31e-4531-a577-43ba06ac3a0f" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+It is working! Also this is our first video!
 
