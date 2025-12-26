@@ -376,3 +376,9 @@ now there is the levine hall!
 
 but some errors are there, let's debug 
 <img width="944" height="599" alt="image" src="https://github.com/user-attachments/assets/26959786-4119-4537-951d-8554554f9f64" />
+
+Map coordinates seems to be out of connection
+<img width="1215" height="706" alt="image" src="https://github.com/user-attachments/assets/e7166375-13bf-4499-bd70-64ec17e23d5d" />
+
+There is no map frame, 
+<img width="1215" height="752" alt="image" src="https://github.com/user-attachments/assets/a980dc29-0293-458c-ad38-9881761a7911" />
