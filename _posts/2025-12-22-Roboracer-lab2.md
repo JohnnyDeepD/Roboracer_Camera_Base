@@ -466,4 +466,5 @@ The car does brake before the wall but it keeps on moving until it crashes
 
 tried removing lidar noise but it does not solve the problem, and changing ttc time only makes more false positives.
 
-            
+before moving on I decided to install keyboard teleop package first, as lab2 suggests.
+
