@@ -439,3 +439,30 @@ https://github.com/user-attachments/assets/34a3a63c-c31e-4531-a577-43ba06ac3a0f
 
 It is working! Also this is our first video!
 
+Now let's compare topic list with Rviz and our safety_node.py
+<img width="1015" height="705" alt="image" src="https://github.com/user-attachments/assets/50f5fecc-6243-422f-89da-c8b054386a3a" />
+
+#this part does not match so fix it
+self.odom_subscription = self.create_subscription(
+            Odometry,
+            'ego_racecar/odom',  # add 'ego_racecar/'
+            self.odom_callback,
+            10)
+
+#build after python code update (we are in cd /lab1_ws)
+colcon build --packages-select lab2_pkg
+#run
+ros2 run lab2_pkg safety_node
+
+
+
+https://github.com/user-attachments/assets/8bc7fa0f-a78f-49ce-b6c3-22878ba09e7b
+<video width="100%" controls>
+  <source src="https://github.com/user-attachments/assets/8bc7fa0f-a78f-49ce-b6c3-22878ba09e7b" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+The car does brake before the wall but it keeps on moving until it crashes
+
+tried removing lidar noise but it does not solve the problem, and changing ttc time only makes more false positives.
+
+            
