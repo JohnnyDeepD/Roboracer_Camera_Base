@@ -457,6 +457,7 @@ ros2 run lab2_pkg safety_node
 
 
 https://github.com/user-attachments/assets/8bc7fa0f-a78f-49ce-b6c3-22878ba09e7b
+
 <video width="100%" controls>
   <source src="https://github.com/user-attachments/assets/8bc7fa0f-a78f-49ce-b6c3-22878ba09e7b" type="video/mp4">
   Your browser does not support the video tag.
