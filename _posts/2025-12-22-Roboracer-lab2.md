@@ -451,6 +451,7 @@ self.odom_subscription = self.create_subscription(
 
 #build after python code update (we are in cd /lab1_ws)
 colcon build --packages-select lab2_pkg
+source install/setup.bash
 #run
 ros2 run lab2_pkg safety_node
 
@@ -473,5 +474,106 @@ sudo apt-get install ros-$ROS_DISTRO-teleop-twist-keyboard
 #run
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
-it is working alright, now coming back to the subject,
+the keyboard teleop is working alright, now coming back to the subject,
 
+
+
+https://github.com/user-attachments/assets/31adf7ea-f0d7-48b5-ad94-b6e7afde1309
+
+<video width="100%" controls>
+  <source src="https://github.com/user-attachments/assets/31adf7ea-f0d7-48b5-ad94-b6e7afde1309" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+The car does stop with AEB and it shows no false positive.
+It worked with keyboard teleop, and did not work with ackermann continuous command, we will figure this out in other labs and this lab2 was with keyboard teleop so we will call it a day here.
+The code for safety_node.py is below:
+
+#import libraries
+
+import rclpy                              # for ROS2
+import math                        # for math.cos() calculation at Time to Collision
+
+from rclpy.node import Node
+
+from sensor_msgs.msg import LaserScan     # for lidar sensor data
+from nav_msgs.msg import Odometry         # for vehicle velocity
+from ackermann_msgs.msg import AckermannDriveStamped   # for vehicle control
+
+
+class SafetyNode(Node):                    # node class inheritance
+
+    # constructor
+    def __init__(self):
+
+        super().__init__('safety_node')    # give a name
+
+        # initialize
+        self.speed = 0.0
+
+        #subscriber (lidar)
+        self.scan_subscription = self.create_subscription(  # subscribe data
+
+            LaserScan,                                 # receive lidar data
+            'scan',                                    # topic name in ROS2
+            self.scan_callback,            # a function that runs for every new data
+            10)                 # queue size to keep in the buffer before processing
+
+
+        #publisher (vehicle control)
+        self.publisher = self.create_publisher(
+
+            AckermannDriveStamped,                    # transmit drive command
+            'drive',                                  # topic name in ROS2
+            10)                 # queue size to keep in the buffer before processing
+        #subscriber (velocity)
+
+        self.odom_subscription = self.create_subscription(  # subscribe data(velocity and coordinate)
+
+            Odometry,                                  # receive velocity
+            'ego_racecar/odom',                        # topic name in ROS2
+            self.odom_callback,            # a function that runs for every new data
+            10)                 # queue size to keep in the buffer before processing
+
+    #methods
+
+    def odom_callback(self, msg):                # msg object as an argument
+        self.speed = msg.twist.twist.linear.x    # velocity is in this path of msg
+
+
+    def scan_callback (self, msg):               # msg object as an argument
+        for i,r in enumerate(msg.ranges):        # get both index and range
+            #lidar noise removal 
+            if math.isinf(r) or math.isnan(r) or r <= 0.0:
+                continue  # if range r is below 0 or infinite, continue (don't do anything)
+
+            theta = msg.angle_min + msg.angle_increment * i    # theta calc
+            #if abs(theta)>0.52:
+            #    continue #angle above 30 degree (0.52rad) shall be ignored
+            
+            v_rel = self.speed * math.cos(theta) #relative velocity calc
+            if v_rel > 0:         # if v_rel is valid
+                ttc = r/v_rel     # calculate time to collision
+                if ttc<0.5:       # if there is collision within 0.5 sec
+                    drive_msg = AckermannDriveStamped() # create message object
+                    drive_msg.drive.speed = 0.0         # initialize speed to 0
+                    self.publisher.publish(drive_msg)   # publish messsage
+                    self.get_logger().warn("AEB Active! Braking...") #leave log
+                    break          # no more loop after the danger
+
+def main(args=None):
+    rclpy.init(args=args)       # start the communication
+    node = SafetyNode()    # create object with SafetyNode class
+
+    try:
+        rclpy.spin(node)        # run node for callback functions
+    except KeyboardInterrupt:   # Ctrl+C for quit
+        pass
+
+    # exit
+    node.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == "__main__":
+    main()
