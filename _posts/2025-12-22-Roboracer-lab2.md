@@ -467,4 +467,11 @@ The car does brake before the wall but it keeps on moving until it crashes
 tried removing lidar noise but it does not solve the problem, and changing ttc time only makes more false positives.
 
 before moving on I decided to install keyboard teleop package first, as lab2 suggests.
+#at cd /lab1_ws
+sudo apt-get update
+sudo apt-get install ros-$ROS_DISTRO-teleop-twist-keyboard
+#run
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+
+it is working alright, now coming back to the subject,
 
