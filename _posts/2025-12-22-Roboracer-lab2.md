@@ -477,13 +477,14 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 the keyboard teleop is working alright, now coming back to the subject,
 
 
-
-https://github.com/user-attachments/assets/31adf7ea-f0d7-48b5-ad94-b6e7afde1309
+https://github.com/user-attachments/assets/8388ddea-eb1b-4130-97d4-7b1ba9ee817b
 
 <video width="100%" controls>
-  <source src="https://github.com/user-attachments/assets/31adf7ea-f0d7-48b5-ad94-b6e7afde1309" type="video/mp4">
+  <source src="https://github.com/user-attachments/assets/8388ddea-eb1b-4130-97d4-7b1ba9ee817b" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+
+
 
 The car does stop with AEB and it shows no false positive.
 It worked with keyboard teleop, and did not work with ackermann continuous command, we will figure this out in other labs and this lab2 was with keyboard teleop so we will call it a day here.
