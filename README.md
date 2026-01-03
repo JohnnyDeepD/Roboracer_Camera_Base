@@ -1,7 +1,3 @@
----
-layout: default
-title: Roboracer Camera Base with Jetson
----
 
 My Roboracer F1tenth Camera Base Project
 
