@@ -12,4 +12,4 @@ My Roboracer F1tenth Camera Base Project
 
 * [Roboracer Lab2 (2025-12-22~)](https://johnnydeepd.github.io/Roboracer_Camera_Base/2025/12/22/Roboracer-lab2.html)
 
-* [Roboracer Lab3 (2026-01-03~)](https://johnnydeepd.github.io/Roboracer_Camera_Base/2025/12/22/Roboracer-lab2.html)
+* [Roboracer Lab3 (2026-01-03~)](https://johnnydeepd.github.io/Roboracer_Camera_Base/2026/01/03/Roboracer-lab3.html)
