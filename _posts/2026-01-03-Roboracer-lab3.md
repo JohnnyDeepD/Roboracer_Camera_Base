@@ -115,3 +115,15 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
+
+#build in workspace root
+cd ~/robo_ws
+colcon build --packages-select lab3_pkg
+source install/setup.bash
+
+#run
+ros2 run lab3_pkg wall_follower
+
+#space error: just deleted and typed spaces in file and built again, what a python indentation.
+
+#time for PID coding
