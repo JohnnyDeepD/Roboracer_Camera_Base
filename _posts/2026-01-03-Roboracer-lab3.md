@@ -241,5 +241,5 @@ https://github.com/user-attachments/assets/2a799cc4-d345-46eb-a448-939c84dd85af
   Your browser does not support the video tag.
 </video>
 
-somethings wrong obviously?
+something is wrong obviously?
 
