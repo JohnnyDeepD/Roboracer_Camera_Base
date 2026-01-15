@@ -15,7 +15,7 @@ If Lookahead distance is small, it will wobble because it is looking at short wa
 Here are the videos with the lookahead distance values:
 
 
-Lookahead distance is one of the major 4 parameters, the total velocity, velocity according to curve, pid k for raceline following amplification, and the lookahead distance. 
+Lookahead distance is one of the major 4 parameters, the max velocity(threshold), velocity according to curve, pid k for raceline following amplification, and the lookahead distance. 
 
 
 Next part would be follow the gap.
