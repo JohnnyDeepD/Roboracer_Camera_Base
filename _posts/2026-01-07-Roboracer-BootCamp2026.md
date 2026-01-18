@@ -30,12 +30,16 @@ Therefore, I decided to add Moving Average Filter at preprocess_lidar function.
         ranges = np.convolve(ranges, kernel, mode='same')    #convolution for average value
 
 
-Not really working so adding steering angle smoothing --> adding did not work, so went back to pure code and change parameters
+Not really getting better so adding steering angle smoothing --> adding did not work, so went back to pure code and change parameters
 (commented out the above moving average filter part also)
 
 only changing the bubble_radius showed little difference, increasing it made it to get further from the wall (obstacle)
 
 
+I could not solve wobble problem, because adding something only made the car to crash.
+But testing with bubble radius and moving average filter still made it not to crash to obstacles, and it was hallway (Levine Hall) so bubble radius did not really matter that much. 
+I tried to make it fast by relating the velocity to distance ahead but it only made the car to crash because when the car was turning at curve when there was nothing ahead it speeded up and it crashed. Therefore at this hallway situation slow speed and not so much of bubble radius would be good idea not to crash. I am still wondering how to make it fast. Maybe adding speed limit when only when it gets too fast after a curve. 
 
-Next part would be follow the gap.
+
+Next part would be 
 
