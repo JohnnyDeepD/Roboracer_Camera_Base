@@ -41,5 +41,10 @@ But testing with bubble radius and moving average filter still made it not to cr
 I tried to make it fast by relating the velocity to distance ahead but it only made the car to crash because when the car was turning at curve when there was nothing ahead it speeded up and it crashed. Therefore at this hallway situation slow speed and not so much of bubble radius would be good idea not to crash. I am still wondering how to make it fast. Maybe adding speed limit only when it gets too fast after a curve. 
 
 
-Next part would be 
+Next part would be MPC, the Model Predictive Control.
+I am planning to spend most of the time here, to push NVidia Jetson Orin Nano to its extreme efficiency. 
+I will first test with normal python mpc_node.py
+Then, I will work with mpc_jax.py which is library with enhanced python calculation for GPU.
+Then I will also test with C++ to consider real world situations. 
+MPC fixes, Python node, and new waypoints settings took a long time in the first place but it worked. 
 
