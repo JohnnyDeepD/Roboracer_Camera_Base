@@ -66,11 +66,20 @@ sol for newest jax:
 @jit(static_argnums=(3,))
 def linearize_dynamics(v, yaw, steering, cfg: MPCConfig):
 
-sol for old jax:
+sol for old jax: just no jit, nor out of the function packaging. 
 def linearize_dynamics(v, yaw, steering, cfg: MPCConfig):
     # ... (codes) ...
     return A, B  # <--- 함수 끝
 
-# out of the function
-linearize_dynamics = jax.jit(linearize_dynamics, static_argnums=(3,))
+# Out of the function, package it with jax.jit to avoid re-compilation for each call
+#linearize_dynamics = jax.jit(linearize_dynamics, static_argnums=(3,))
+
+lax.scan function
+((A, B), C) error for 3 value transmission -> make it (A, B) only 2 (final value, accumulated record)
+(_, K_rev), _ = lax.scan(       ->      _, K_rev = lax.scan(
+
+Problems I had:
+Numpy/Jax mix use problem, static argument problem, nearest_point type problem, Lax Scan data transmit problem.
+
+
 
