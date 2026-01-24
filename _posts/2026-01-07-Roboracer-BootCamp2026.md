@@ -48,3 +48,6 @@ Then, I will work with mpc_jax.py which is library with enhanced python calculat
 Then I will also test with C++ to consider real world situations. 
 MPC fixes, Python node, and new waypoints settings took a long time in the first place but it worked. 
 
+A Problem:
+Python code has Latency, so there is a mismatch between sensor data processing and control cycle, which causes localization instability. 
+
