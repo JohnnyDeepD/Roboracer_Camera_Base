@@ -51,3 +51,26 @@ MPC fixes, Python node, and new waypoints settings took a long time in the first
 A Problem:
 Python code has Latency, so there is a mismatch between sensor data processing and control cycle, which causes localization instability. 
 
+[Trying Jax library for faster python calculation acceleration]
+
+Setting up mpc_jax.py is not easy because first, reading waypoint file cannot be done with jax numpy (jnp) GPU, so it has to be changed to using normal numpy with CPU. Furthermore, numba accelerator calculations could not use GPU for nearest point calculation also so we changed it to normal CPU numpy with changing all the jnp matrix to normal matrix, and matched float32 type as error showed up.
+(imported numpy and made loading waypoint to use numpy, not jax)
+<img width="1099" height="717" alt="image" src="https://github.com/user-attachments/assets/63a1390f-02c4-46f3-9165-272c0b24eddf" />
+
+sol:
+_, _, _, idx = nearest_point(np.array([px,py], dtype=np.float32), np.array(wp_xy, dtype=np.float32))
+
+and also changed some configuration for jax decorator errors (should not use static variables)
+sol for newest jax:
+# cfg (index 3) variable is static
+@jit(static_argnums=(3,))
+def linearize_dynamics(v, yaw, steering, cfg: MPCConfig):
+
+sol for old jax:
+def linearize_dynamics(v, yaw, steering, cfg: MPCConfig):
+    # ... (codes) ...
+    return A, B  # <--- 함수 끝
+
+# out of the function
+linearize_dynamics = jax.jit(linearize_dynamics, static_argnums=(3,))
+
