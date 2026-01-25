@@ -69,7 +69,7 @@ def linearize_dynamics(v, yaw, steering, cfg: MPCConfig):
 sol for old jax: just no jit, nor out of the function packaging. 
 def linearize_dynamics(v, yaw, steering, cfg: MPCConfig):
     # ... (codes) ...
-    return A, B  # <--- 함수 끝
+    return A, B  # <--- end of function
 
 # Out of the function, package it with jax.jit to avoid re-compilation for each call
 #linearize_dynamics = jax.jit(linearize_dynamics, static_argnums=(3,))
@@ -81,5 +81,10 @@ lax.scan function
 Problems I had:
 Numpy/Jax mix use problem, static argument problem, nearest_point type problem, Lax Scan data transmit problem.
 
+The car went straight to the wall. Therefore I slowed down the car and made it look ahead for 7 points after, it wobbled a little bit straight then it went to the wall. 
 
+I tried more stuff but nothing worked, and I found that hz is too small. Jax is having some sort of bottleneck.
+Therefore I decided to move on to C++, I will try Jax again later on.
+
+<img width="1219" height="717" alt="image" src="https://github.com/user-attachments/assets/f0a0ecff-5db4-40b4-87a3-7595e6e5cd31" />
 
