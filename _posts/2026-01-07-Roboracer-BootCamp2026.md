@@ -83,7 +83,7 @@ Numpy/Jax mix use problem, static argument problem, nearest_point type problem, 
 
 The car went straight to the wall. Therefore I slowed down the car and made it look ahead for 7 points after, it wobbled a little bit straight then it went to the wall. 
 
-I tried more stuff but nothing worked, and I found that hz is too small. Jax is having some sort of bottleneck.
+I tried more stuff but nothing worked, and I found that hz is too small. Jax is having some sort of data processing bottleneck.
 Therefore I decided to move on to C++, I will try Jax again later on.
 
 <img width="1219" height="717" alt="image" src="https://github.com/user-attachments/assets/f0a0ecff-5db4-40b4-87a3-7595e6e5cd31" />
