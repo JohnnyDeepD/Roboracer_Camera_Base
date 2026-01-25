@@ -117,3 +117,17 @@ Rd (100.0 -> 30.0): just to follow above change
 
 now it corners nicely,
 but I would like to let it turn a bit earlier and make the whole velocity fast for testing now.
+this is what we are gonna do,
+🛠️ 1. MPCConfig 수정 (공격적인 세팅)
+mpc_node.cpp 위쪽 MPCConfig를 이렇게 바꾸세요.
+
+[change point]
+
+TK (Horizon): 13 → 20 (look ahead further and react faster)
+MAX_SPEED: 2.0 → 3.5 (faster velocity)
+Rk (Steering Cost): 30 → 10 (less cost for steering)
+
+ref(2,k)=w[3] * 1.0; ->  ref(2,k)=w[3] * 2.0; (waypoint velocity acce. *2.0 for faster)
+
+some localization crack issue but it works ok. faster than python codes.
+when we only increase the speed, it wobbles a lot, but it still manages to follow the waypoint.
