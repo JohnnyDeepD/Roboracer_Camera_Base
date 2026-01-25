@@ -131,3 +131,18 @@ ref(2,k)=w[3] * 1.0; ->  ref(2,k)=w[3] * 2.0; (waypoint velocity acce. *2.0 for 
 
 some localization crack issue but it works ok. faster than python codes.
 when we only increase the speed, it wobbles a lot, but it still manages to follow the waypoint.
+
+localization might be solved when we increase particle filter particle count. the /odom topic hz is bigger than mpc /drive topic so data receiving is fast enough. very good.
+<img width="1219" height="717" alt="image" src="https://github.com/user-attachments/assets/d019ae71-969e-4a97-b304-2659fe1fed65" />
+
+for faster speed I would like to test:
+MAX_SPEED: 5.0 (faster velocity)
+Rk (Steering Cost): 30 (higher cost for steering with faster speed)
+TK (Horizon): 25 (look ahead further and react faster)
+
+still wobbles, 1 more test today
+Qk: 13.5 -> 2.0   less weight for correct path for smoothness
+Rk: 35  more weight on steering to steer less
+Tk: 18 balanced look ahead
+
+it goes really smooth and fast, no wobble, but it gets in corner too late, 
