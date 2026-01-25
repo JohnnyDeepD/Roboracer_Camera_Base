@@ -88,3 +88,7 @@ Therefore I decided to move on to C++, I will try Jax again later on.
 
 <img width="1219" height="717" alt="image" src="https://github.com/user-attachments/assets/f0a0ecff-5db4-40b4-87a3-7595e6e5cd31" />
 
+C++ shows higher 30 Hz condition. This is because Jax is more for bigger matrix calculation (like 1000X1000), but we are only using 4X4 or 8X8 matrix here, and python needs interpreter, where C++ is already compiled, directly communicating with CPU. 
+<img width="1219" height="717" alt="image" src="https://github.com/user-attachments/assets/934f0403-1eae-44a7-9763-cafc22a1da96" />
+
+Test with pure pursuit of C++ and waypoint worked, so moving on to real MPC with OSQP
