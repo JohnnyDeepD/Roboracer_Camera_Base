@@ -145,4 +145,22 @@ Qk: 13.5 -> 2.0   less weight for correct path for smoothness
 Rk: 35  more weight on steering to steer less
 Tk: 18 balanced look ahead
 
-it goes really smooth and fast, no wobble, but it gets in corner too late, 
+it goes really smooth and fast, no wobble, but it gets in corner too late, so
+Qk: 5.0   little more weight for correct path
+Rk: 25  little less weight on steering to steer little bit more
+Tk: 23 balanced look ahead little bit more
+
+it follows path well and curves well but wobbles again, so
+Qk: 2.0   the one with no wobble, yaw 5.0 for less weight on angle, v cost stays 5.5 to have correct velocity
+Rk: 30 little less weight on steering
+Tk: 23 increase look ahead
+
+wobble is good but late corner,
+now its my intuition tuning time(look at phone pics)
+
+little bit of wobble but gets in corner (still bit late but success), balanced code for now, 
+Qk: 2.0 the one with no wobble, yaw 7.0 for less weight on angle, v cost stays 5.5 to have correct velocity
+Rk: 30 little less weight on steering
+Tk: 18 balanced look ahead
+
+still could not get into second corner and has little wobble, but we are out of battery. We will come back!
