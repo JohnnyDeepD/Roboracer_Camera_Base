@@ -98,3 +98,22 @@ Problems while making the C++ file with OSQP: mainly changing solve_mpc() functi
 2. csc 구조체 수동 할당: 이전 코드는 data->P가 초기화되지 않은 상태에서 접근하려 해서 위험했습니다. 위 코드처럼 c_malloc으로 먼저 공간을 만들고 값을 넣어야 프로그램이 안 죽습니다.
 3. %lld 수정: 젯슨(ARM)에서는 c_int가 long long이라서 %d 대신 %lld를 써야 경고가 사라집니다.
 
+with c++ mpc_node it moves alone (without my joystick command) and it goes straight to the wall even faster.
+So I put Affine Term for calculation + safety code(initial velocity 0: wait for deadman switch).
+
+now it goes straight line really fast but does make throught a corner. It tries to turn once then it turns back to the opposite direction and goes straight. 
+Thus I removed waypoint velocity acceleration part.
+
+ref(2,k)=w[3]*4.0;
+->
+ref(2,k)=w[3] * 1.0;
+
+
+now it moves slow but it tries to turn too late at the corner. so we changed:
+TK (8 → 13): (too small step ahead, look at the corner too late)
+
+Rk (100.0 → 30.0): (too high weight on turning cost, so it tries not to turn)
+Rd (100.0 -> 30.0): just to follow above change
+
+now it corners nicely,
+but I would like to let it turn a bit earlier and make the whole velocity fast for testing now.
