@@ -92,3 +92,9 @@ C++ shows higher 30 Hz condition. This is because Jax is more for bigger matrix 
 <img width="1219" height="717" alt="image" src="https://github.com/user-attachments/assets/934f0403-1eae-44a7-9763-cafc22a1da96" />
 
 Test with pure pursuit of C++ and waypoint worked, so moving on to real MPC with OSQP
+
+Problems while making the C++ file with OSQP: mainly changing solve_mpc() function and setupQP()
+1. cast_to_csc 인자 수정: 불필요한 5번째 인자(nzmax)를 제거해서 에러를 없앴습니다.
+2. csc 구조체 수동 할당: 이전 코드는 data->P가 초기화되지 않은 상태에서 접근하려 해서 위험했습니다. 위 코드처럼 c_malloc으로 먼저 공간을 만들고 값을 넣어야 프로그램이 안 죽습니다.
+3. %lld 수정: 젯슨(ARM)에서는 c_int가 long long이라서 %d 대신 %lld를 써야 경고가 사라집니다.
+
